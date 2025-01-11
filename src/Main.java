@@ -17,19 +17,12 @@ public class Main {
         // bufferedReader il ia pe fileReader ca parametru la constructor
         BufferedReader bufferedReader = new BufferedReader(fileReader);
 
-        // citim prima linie
-        String line = bufferedReader.readLine();
-        while(line != null)
-        {
-            // impartim linia la fiecare &
-            String[] entries = line.split("&");
-
-            // daca incepe numele cu caracterul dat de la tastatura, il printam
-            if(entries[1].startsWith(inputChar))
-                System.out.println(entries[1]);
-
-            // citim urmatoarea linie
-            line = bufferedReader.readLine();
-        }
+        bufferedReader.lines()
+                // inlocuieste fiecare linie cu doar ce apare dupa prima &
+                .map( (line)->line.split("&")[1] )
+                // pastram doar cele care incep cu caracterul dat de la tastatura
+                .filter( (name) -> name.startsWith(inputChar) )
+                // printam tot ce a ramas
+                .forEach( (name) -> System.out.println(name) );
     }
 }

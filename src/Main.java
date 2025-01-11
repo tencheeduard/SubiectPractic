@@ -10,14 +10,13 @@ public class Main {
         // bufferedReader il ia pe fileReader ca parametru la constructor
         BufferedReader bufferedReader = new BufferedReader(fileReader);
 
-        // citim prima linie
-        String line = bufferedReader.readLine();
-        while(line != null)
-        {
-            System.out.println(line);
+        // .lines() da un stream cu toate liniile din fisier
+        bufferedReader.lines()
+                // pentru fiecare linie, o printam
+                .forEach( (line) -> System.out.println(line) );
 
-            // citim urmatoarea linie
-            line = bufferedReader.readLine();
-        }
+
+                // mai repede scris ar fi .forEach(System.out::println), unde :: reprezinta o referinta la metoda.
+                // dar nu e necesar
     }
 }

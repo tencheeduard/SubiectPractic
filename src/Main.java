@@ -1,22 +1,35 @@
 import java.io.*;
+import java.util.Scanner;
 
 public class Main {
     public static void main(String[] args) throws IOException {
         File file = new File("punkte.txt");
 
 
+        // Folosim scanner pentru input de la tastatura
+        Scanner input = new Scanner(System.in);
+
+        // luam primul caracter din string-ul de input si il memoram
+        String inputChar = input.next();
+
         // Avem nevoie de un FileReader si un BufferedReader.
         FileReader fileReader = new FileReader(file);
         // bufferedReader il ia pe fileReader ca parametru la constructor
         BufferedReader bufferedReader = new BufferedReader(fileReader);
 
-        // .lines() da un stream cu toate liniile din fisier
-        bufferedReader.lines()
-                // pentru fiecare linie, o printam
-                .forEach( (line) -> System.out.println(line) );
+        // citim prima linie
+        String line = bufferedReader.readLine();
+        while(line != null)
+        {
+            // impartim linia la fiecare &
+            String[] entries = line.split("&");
 
+            // daca incepe numele cu caracterul dat de la tastatura, il printam
+            if(entries[1].startsWith(inputChar))
+                System.out.println(entries[1]);
 
-                // mai repede scris ar fi .forEach(System.out::println), unde :: reprezinta o referinta la metoda.
-                // dar nu e necesar
+            // citim urmatoarea linie
+            line = bufferedReader.readLine();
+        }
     }
 }
